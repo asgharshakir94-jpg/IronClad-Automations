@@ -510,20 +510,40 @@
     </div>
   </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     (function () {
+      var supabase = window.supabase.createClient(
+        'https://xzorljzuppkesjncwenx.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6b3Jsanp1cHBrZXNqbmN3ZW54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxMzI2NzIsImV4cCI6MjEwNTcwODY3Mn0.oAeQynd8r8Bp8gc7KC6RO446bcbumCHSB0up5SUw_Mw'
+      );
       var form = document.getElementById('auditForm');
       var status = document.getElementById('formStatus');
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         status.textContent = 'Sending...';
         status.className = 'form-status';
-        fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        }).then(function (res) {
-          if (res.ok) {
+
+        var data = new FormData(form);
+        var lead = {
+          name: data.get('name'),
+          business: data.get('business'),
+          email: data.get('email'),
+          phone: data.get('phone'),
+          message: data.get('message')
+        };
+
+        Promise.all([
+          supabase.from('leads').insert([lead]),
+          fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          })
+        ]).then(function (results) {
+          var dbResult = results[0];
+          var emailRes = results[1];
+          if (!dbResult.error || emailRes.ok) {
             status.textContent = 'Sent — we\'ll be in touch within a day.';
             status.className = 'form-status ok';
             form.reset();
