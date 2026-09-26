@@ -252,6 +252,16 @@
     section { padding: 56px 0; }
   }
 
+  .product-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: start; margin-top: 8px; }
+  .product-list { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .product-list li { padding-left: 20px; position: relative; color: var(--paper-dim); font-size: 14px; }
+  .product-list li::before { content: "→"; position: absolute; left: 0; color: var(--rivet); font-family: 'JetBrains Mono', monospace; }
+  #product .audit-form { border: 1px solid var(--line); background: var(--ink-2); padding: 24px; }
+
+  @media (max-width: 860px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; scroll-behavior: auto !important; }
   }
@@ -272,6 +282,7 @@
       <a href="#services">Services</a>
       <a href="#evolution">The edge</a>
       <a href="#process">Process</a>
+      <a href="#product">Engine</a>
       <a href="#contact">Book audit</a>
     </nav>
     <div class="nav-cta">
@@ -287,24 +298,25 @@
       <div class="hero-grid">
         <div>
           <span class="tag">Next-gen business systems</span>
-          <h1 style="margin-top:18px;">We build <em>ironclad</em> automated systems for scaling trades businesses.</h1>
-          <p class="hero-sub">Stop losing hours to manual data entry, fragmented apps, and delayed lead responses. We design and install custom AI and n8n systems that protect your margins and scale your operations — built for plumbing, HVAC, electrical, and other field-service companies.</p>
+          <h1 style="margin-top:18px;">You're on the job. Your <em>phone</em> shouldn't go to voicemail.</h1>
+          <p style="margin-top:18px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:19px; color:var(--rivet-bright);">You finish the job — we don't let the next one slip away.</p>
+          <p class="hero-sub" style="margin-top:14px;">Every call you can't take while you're finishing a job is a lead your competitor is about to book. Our AI answers, qualifies, and schedules for you — in real time, while you're still on the tools. Built for plumbing, HVAC, electrical, and other field-service companies.</p>
           <div class="hero-cta">
             <a class="btn" href="#contact">Get a free workflow audit</a>
             <a class="btn btn-ghost" href="#services">See the services</a>
           </div>
           <div class="hero-stats">
             <div class="hero-stat">
+              <div class="val">74%</div>
+              <div class="lbl">of contractor calls go unanswered</div>
+            </div>
+            <div class="hero-stat">
               <div class="val">4 sec</div>
-              <div class="lbl">avg. lead response time</div>
+              <div class="lbl">avg. AI lead response time</div>
             </div>
             <div class="hero-stat">
-              <div class="val">80%</div>
-              <div class="lbl">support queries resolved by AI</div>
-            </div>
-            <div class="hero-stat">
-              <div class="val">0</div>
-              <div class="lbl">manual re-entry once installed</div>
+              <div class="val">$189K</div>
+              <div class="lbl">avg. revenue lost per year to missed calls</div>
             </div>
           </div>
         </div>
@@ -370,8 +382,8 @@
       <div class="services-grid">
         <div class="service-card">
           <span class="idx mono">S-01</span>
-          <h3>Inbound lead responders</h3>
-          <p>Instantly capture website and social form submissions. AI analyzes urgency, texts your team in seconds, and auto-schedules the call before the lead cools off.</p>
+          <h3>AI call answering & booking</h3>
+          <p>Your phone gets answered even when your hands are full. AI picks up, qualifies the job, checks your calendar, and books it — while you're still finishing the last one.</p>
           <div class="spec">RESPONSE TIME: ~4S</div>
         </div>
         <div class="service-card">
@@ -473,6 +485,46 @@
 
   <hr class="dashed-rule">
 
+  <section id="product">
+    <div class="wrap section-inner">
+      <div class="eyebrow-line">
+        <span class="num mono">04</span>
+        <span class="rule"></span>
+        <span class="tag">Coming soon</span>
+      </div>
+      <div class="product-grid">
+        <div>
+          <h2 style="font-size: clamp(26px,3.2vw,38px); max-width: 18ch;">Introducing <span style="color:var(--rivet);">IronClad Engine</span> — the system, without the install.</h2>
+          <p style="margin-top:16px; color: var(--paper-dim); max-width: 52ch;">Everything on this page has been custom-built, one business at a time. IronClad Engine packages the same lead-response, AI agent, and CRM-sync pipeline into a self-serve product — connect your tools, and it runs in the background from day one.</p>
+          <ul class="product-list">
+            <li>Pre-built lead responder, no n8n setup required</li>
+            <li>Connect your existing CRM, calendar, and forms</li>
+            <li>Same 4-second response engine, self-managed</li>
+          </ul>
+          <p class="mono" style="font-size:12px; color:var(--steel); margin-top:22px;">Pricing hasn't been set yet — early access spots are free to claim now.</p>
+        </div>
+        <form class="audit-form" id="waitlistForm">
+          <div>
+            <label for="w-name">Name</label>
+            <input id="w-name" name="name" type="text" required placeholder="Your name">
+          </div>
+          <div>
+            <label for="w-business">Business name</label>
+            <input id="w-business" name="business" type="text" required placeholder="e.g. Miller Plumbing Co.">
+          </div>
+          <div>
+            <label for="w-email">Email</label>
+            <input id="w-email" name="email" type="email" required placeholder="you@business.com">
+          </div>
+          <button class="btn" type="submit" style="justify-content:center; width:100%;">Request early access</button>
+          <div class="form-status" id="waitlistStatus"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <hr class="dashed-rule">
+
   <section id="contact">
     <div class="wrap">
       <div class="cta-panel">
@@ -545,6 +597,41 @@
           var emailRes = results[1];
           if (!dbResult.error || emailRes.ok) {
             status.textContent = 'Sent — we\'ll be in touch within a day.';
+            status.className = 'form-status ok';
+            form.reset();
+          } else {
+            status.textContent = 'Something went wrong — email us directly instead.';
+            status.className = 'form-status err';
+          }
+        }).catch(function () {
+          status.textContent = 'Something went wrong — email us directly instead.';
+          status.className = 'form-status err';
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var supabase = window.supabase.createClient(
+        'https://xzorljzuppkesjncwenx.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6b3Jsanp1cHBrZXNqbmN3ZW54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxMzI2NzIsImV4cCI6MjEwNTcwODY3Mn0.oAeQynd8r8Bp8gc7KC6RO446bcbumCHSB0up5SUw_Mw'
+      );
+      var form = document.getElementById('waitlistForm');
+      var status = document.getElementById('waitlistStatus');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        status.textContent = 'Sending...';
+        status.className = 'form-status';
+        var data = new FormData(form);
+        var entry = {
+          name: data.get('name'),
+          business: data.get('business'),
+          email: data.get('email')
+        };
+        supabase.from('waitlist').insert([entry]).then(function (res) {
+          if (!res.error) {
+            status.textContent = 'You\'re on the list — we\'ll reach out when spots open.';
             status.className = 'form-status ok';
             form.reset();
           } else {
