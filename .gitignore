@@ -1,3 +1,6 @@
 api key and project url.txt
 pass.txt
 *.txt
+.env.local
+
+!llms.txt
